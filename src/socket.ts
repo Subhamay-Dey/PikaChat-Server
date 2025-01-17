@@ -18,7 +18,11 @@ export function setupSocket(io: Server) {
 
     io.on('connection', (socket: CustomSocket) => {
 
-        socket.join(socket.room)
+        if (socket.room) {
+            socket.join(socket.room);
+        } else {
+            console.error("Socket room is undefined for socket id:", socket.id);
+        }
 
         console.log('The socket connected..', socket.id);
 
@@ -28,7 +32,11 @@ export function setupSocket(io: Server) {
             await prisma.chats.create({
                 data: data
             })
-            socket.to(socket.room).emit("message", data)
+            if (socket.room) {
+                socket.to(socket.room).emit("message", data);
+            } else {
+                console.error("Socket room is undefined for socket id:", socket.id);
+            }
         });
 
         socket.on("disconnect", () => {
