@@ -16,7 +16,7 @@ import { instrument } from "@socket.io/admin-ui";
 const server = createServer(app)
 const io = new Server(server, {
   cors: {
-    origin: [process.env.FRONTEND_URL, "https://admin.socket.io"],
+    origin: [process.env.FRONTEND_URL!, "https://admin.socket.io"],
     credentials: true,
   },
   adapter: createAdapter(redis)
