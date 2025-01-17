@@ -9,7 +9,7 @@ const authMiddleware = (req:Request, res:Response, next:NextFunction) => {
     const token = authHeader.split(" ")[1]
 
     //Verifying the token
-    jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    jwt.verify(token, process.env.JWT_SECRET!, (err, user) => {
         if(err) {
             return res.status(403).json({status:403, message: "Invalid token" })
         }

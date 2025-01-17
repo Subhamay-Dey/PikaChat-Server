@@ -11,7 +11,7 @@ class ChatGroupController {
                 data: {
                     title: body.title,
                     passcode: body.passcode,
-                    user_id: user.id,
+                    user_id: user?.id ?? 0,
                 }
             })
             
@@ -26,7 +26,7 @@ class ChatGroupController {
             const user = req.user
             const groups = await prisma.chatGroup.findMany({
                 where: {
-                    user_id:user.id
+                    user_id:user?.id
                 },
                 orderBy: {
                     created_at: 'desc'
